@@ -1,0 +1,29 @@
+
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test-and-plots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: python -m pip install -U pip pytest matplotlib
+      - name: Run tests
+        run: pytest -q
+      - name: Generate example plots
+        run: |
+          python experiments.py --mode min_prev --mins 0.3,0.5 --d1 8 --d2 25 --features 3 --instances 4 --seed 5 --algos range,naive --export_svg
+          python experiments.py --mode range --min_prev 0.5 --d1s 3 --d2s 6,8 --csv examples/toy.csv --algos range,naive --export_svg
+          python lattice_export.py --outfile lattice_demo --d1 8 --d2 30 --min_prev 0.5 --features 4 --instances 5 --seed 7 --cross_level --png
+      - name: Upload plots
+        uses: actions/upload-artifact@v4
+        with:
+          name: plots
+          path: plots/**

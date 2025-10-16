@@ -1,0 +1,33 @@
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "range-comine"
+version = "0.1.0"
+description = "Reference implementation of Range–CoMine with baselines and experiments"
+authors = [
+  { name = "Srikanth Baride" },
+  { name = "ChatGPT (scaffold assistance)" }
+]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "matplotlib>=3.7",
+  "pytest>=7.0"
+]
+license = { text = "MIT" }
+
+[project.urls]
+Homepage = "https://github.com/your-user/range-comine"
+
+
+[project.scripts]
+range-comine-cli = "range_comine.cli:main"
+range-comine-exp = "experiments:main"
+range-comine-lattice = "lattice_export:main"
+
+[tool.uv]
+# You can run: uv venv && uv pip install -e . && uv run experiments.py ...
+# To create a lock: uv lock

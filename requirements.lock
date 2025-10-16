@@ -1,0 +1,5 @@
+
+# Lightweight lock (regenerate with: `pip install -r requirements.txt && pip freeze > requirements.lock`
+# or `uv lock` to create uv.lock)
+matplotlib
+pytest
